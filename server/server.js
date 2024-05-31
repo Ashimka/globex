@@ -1,17 +1,13 @@
 const fs = require("fs");
 const fastify = require("fastify")({ logger: true });
+const cors = require("fastify-cors");
 
-fastify.register(require("fastify-cors"), {
-  origin: (origin, cb) => {
-    const hostname = new URL(origin).hostname;
-    if (hostname === "localhost") {
-      //  Request from localhost will pass
-      cb(null, true);
-      return;
-    }
-    // Generate an error on other origins, disabling access
-    cb(new Error("Not allowed"), false);
-  },
+fastify.register(cors, {
+  origin: [
+    "http://localhost:5173",
+    "http://globex.ashimka.ru",
+    "https://globex.ashimka.ru",
+  ],
 });
 
 fastify.get("/api", async (request, reply) => {
