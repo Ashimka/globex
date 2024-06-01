@@ -8,14 +8,14 @@ const Search = ({ setSearchUserName }: searchType) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const updateSearchValue = (str: string) => {
-    setTimeout(() => {
-      setSearchUserName(str);
-    }, 1000);
+    setSearchUserName(str);
   };
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
-    updateSearchValue(event.target.value);
+    setTimeout(() => {
+      updateSearchValue(event.target.value);
+    }, 1000);
   };
 
   return (

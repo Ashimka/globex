@@ -1,16 +1,17 @@
 const fs = require("fs");
 const fastify = require("fastify")({ logger: true });
-const cors = require("fastify-cors");
+const cors = require("@fastify/cors");
 
 fastify.register(cors, {
   origin: [
     "http://localhost:5173",
     "http://globex.ashimka.ru",
-    "https://globex.ashimka.ru",
+    "http://globex.ashimka.ru/",
+    "https://globex.ashimka.ru/",
   ],
 });
 
-fastify.get("/api", async (request, reply) => {
+fastify.get("/", (request, reply) => {
   fs.readFile("./users.json", "utf8", (err, data) => {
     if (err) {
       console.log("File read failed:", err);
@@ -32,7 +33,7 @@ fastify.get("/api", async (request, reply) => {
 
 const start = async () => {
   try {
-    await fastify.listen(3010);
+    await fastify.listen({ port: 3010 });
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
