@@ -31,6 +31,7 @@ const App = () => {
     try {
       const data = await fetch(URL, {
         headers: {
+          Accept: "application/json",
           "Content-Type": "application/json",
         },
       });
@@ -45,7 +46,12 @@ const App = () => {
 
   const fetchSearchUser = React.useCallback(async () => {
     try {
-      const data = await fetch(`${URL}?term=${searchUserName}`);
+      const data = await fetch(`${URL}?term=${searchUserName}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
 
       if (data.ok) {
         setUsersList(await data.json());
