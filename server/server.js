@@ -11,7 +11,7 @@ fastify.register(cors, {
   ],
 });
 
-fastify.get("/", (request, reply) => {
+fastify.get("/api", (request, reply) => {
   fs.readFile("./users.json", "utf8", (err, data) => {
     if (err) {
       console.log("File read failed:", err);
