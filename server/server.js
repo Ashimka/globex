@@ -1,14 +1,22 @@
 const fs = require("fs");
 const fastify = require("fastify")({ logger: true });
 const cors = require("@fastify/cors");
+const path = require("path");
 
 fastify.register(cors, {
   origin: [
     "http://localhost:5173",
     "http://globex.ashimka.ru",
-    "http://globex.ashimka.ru/",
-    "https://globex.ashimka.ru/",
+    "https://globex.ashimka.ru",
   ],
+});
+
+fastify.register(require("@fastify/static"), {
+  root: path.join(__dirname, "dist"),
+});
+
+fastify.get("/", function (req, reply) {
+  reply.sendFile("index.html");
 });
 
 fastify.get("/api", (request, reply) => {
