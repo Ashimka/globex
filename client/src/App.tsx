@@ -29,7 +29,11 @@ const App = () => {
 
   const fetchData = async () => {
     try {
-      const data = await fetch(URL);
+      const data = await fetch(URL, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (data.ok) {
         setUsersList(await data.json());

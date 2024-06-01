@@ -4,11 +4,8 @@ const cors = require("@fastify/cors");
 const path = require("path");
 
 fastify.register(cors, {
-  origin: [
-    "http://localhost:5173",
-    "http://globex.ashimka.ru",
-    "https://globex.ashimka.ru",
-  ],
+  origin: "*",
+  methods: ["POST", "GET", "OPTIONS"],
 });
 
 fastify.register(require("@fastify/static"), {
