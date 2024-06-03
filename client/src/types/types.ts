@@ -9,8 +9,9 @@ export type userType = {
 };
 
 export type propsType = {
+  showPopup: boolean;
   closePopup: () => void;
-  modalRef: React.MutableRefObject<HTMLDialogElement | null>;
+  // modalRef: React.MutableRefObject<HTMLDialogElement | null>;
   user: userType | null;
 };
 

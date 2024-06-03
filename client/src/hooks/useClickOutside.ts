@@ -1,17 +1,18 @@
-import React, { RefObject } from "react";
+import React from "react";
 
 export const useClickOutside = (
-  modalRef: RefObject<HTMLElement>,
+  modalRef: React.RefObject<HTMLDivElement>,
   clickClose: () => void
 ) => {
   React.useEffect(() => {
     const listener = (event: MouseEvent | TouchEvent) => {
       if (
-        !modalRef.current ||
-        modalRef.current.contains(event.target as Node)
+        modalRef.current &&
+        !modalRef.current?.contains(event.target as HTMLDivElement)
       ) {
         clickClose();
-        document.querySelector("body")?.classList.remove("hidden");
+
+        document.body?.classList.remove("hidden");
       }
     };
     document.addEventListener("mousedown", listener);

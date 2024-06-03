@@ -13,19 +13,10 @@ const App = () => {
   const [searchUserName, setSearchUserName] = React.useState("");
 
   const [showPopup, setShowPopup] = React.useState(false);
-  const modalRef = React.useRef<null | HTMLDialogElement>(null);
 
   React.useEffect(() => {
     fetchData();
   }, []);
-
-  React.useEffect(() => {
-    if (showPopup) {
-      modalRef.current?.showModal();
-    } else {
-      modalRef.current?.close();
-    }
-  }, [showPopup]);
 
   const fetchData = async () => {
     try {
@@ -70,13 +61,12 @@ const App = () => {
   const openPopup = (data: userType) => {
     setShowPopup(true);
     setUser(data);
-    document.querySelector("body")?.classList.add("hidden");
+    document.body?.classList.add("hidden");
   };
 
   const closePopup = () => {
     setShowPopup(false);
-    modalRef.current?.close();
-    document.querySelector("body")?.classList.remove("hidden");
+    document.body?.classList.remove("hidden");
   };
 
   return (
@@ -101,9 +91,7 @@ const App = () => {
               </li>
             ))}
         </ul>
-        {showPopup && (
-          <Popup closePopup={closePopup} modalRef={modalRef} user={user} />
-        )}
+        {<Popup showPopup={showPopup} closePopup={closePopup} user={user} />}
       </div>
     </>
   );
