@@ -6,6 +6,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+html {
+  scrollbar-gutter: stable;
+}
 input:focus {
   outline-color: #d4defe;
 }
